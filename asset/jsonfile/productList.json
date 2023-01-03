@@ -1,0 +1,51 @@
+[
+  {
+    "productName":"ProductName2",
+    "price": 12.5,
+    "rating": 2.0,
+    "imageUrl": "asset/Image/Salad/salad2.jpg"
+  },
+  {
+    "productName":"ProductName3",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad3.jpg"
+  },
+  {
+    "productName":"ProductName4",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad4.jpg"
+  },
+  {
+  "productName":  "ProductName5",
+  "price": 12.5,
+  "rating": 3.0,
+  "imageUrl": "asset/Image/Salad/salad5.jpg"
+  },
+
+  {
+    "productName":"ProductName2",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad2.jpg"
+  },
+  {
+    "productName":"ProductName3",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad3.jpg"
+  },
+  {
+    "productName":"ProductName4",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad4.jpg"
+  },
+  {
+    "productName":  "ProductName5",
+    "price": 12.5,
+    "rating": 3.0,
+    "imageUrl": "asset/Image/Salad/salad5.jpg"
+  }
+]
