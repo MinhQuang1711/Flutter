@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:homework2/provider/badge_provider.dart';
+import 'package:provider/provider.dart';
 
 class CardProduct extends StatelessWidget {
   CardProduct(
@@ -52,7 +54,9 @@ class CardProduct extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: 15),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<BadgeProvider>().add();
+                    },
                     icon: Icon(
                       Icons.add_box,
                       color: Colors.yellow.shade600,

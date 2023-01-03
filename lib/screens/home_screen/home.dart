@@ -1,15 +1,24 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:homework2/provider/badge_provider.dart';
 import 'package:homework2/screens/cart_screen/cart_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'bottom_bar.dart';
 import 'home_body.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -33,13 +42,20 @@ class Home extends StatelessWidget {
               icon: Icon(Icons.search),
               color: Colors.black,
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CartScreen()));
-              },
-              icon: Icon(Icons.shopping_cart),
-              color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.only(right: 15, top: 10),
+              child: Badge(
+                badgeContent:
+                    Text(context.watch<BadgeProvider>().counter.toString()),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartScreen()));
+                  },
+                  icon: Icon(Icons.shopping_cart),
+                  color: Colors.black,
+                ),
+              ),
             )
           ],
         ),
