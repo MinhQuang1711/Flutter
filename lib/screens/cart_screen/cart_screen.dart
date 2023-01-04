@@ -15,7 +15,9 @@ class CartScreen extends StatelessWidget {
           backgroundColor: Colors.yellow.shade700,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           title: Text('Giỏ hàng'),
         ),
@@ -25,4 +27,3 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
-

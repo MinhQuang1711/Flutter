@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homework2/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../custom_widget/custom_button.dart';
 
@@ -34,7 +36,7 @@ class _BottomBarState extends State<BottomBar> {
                     style: TextStyle(fontSize: 16),
                     children: [
                       TextSpan(
-                          text: '${total}',
+                          text: '${context.read<CartProvider>().total}',
                           style: TextStyle(fontSize: 16, color: Colors.red))
                     ])),
               ),

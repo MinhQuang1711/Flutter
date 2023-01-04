@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:homework2/product_model/product_model.dart';
 import 'package:homework2/provider/badge_provider.dart';
+import 'package:homework2/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 class CardProduct extends StatelessWidget {
@@ -12,10 +14,10 @@ class CardProduct extends StatelessWidget {
       required this.price,
       Key? key})
       : super(key: key);
-  String? productName;
-  double? rating;
-  double? price;
-  String? imageurl;
+  String productName;
+  double rating;
+  double price;
+  String imageurl;
   RatingBar ratingBar;
 
   @override
@@ -56,6 +58,8 @@ class CardProduct extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       context.read<BadgeProvider>().add();
+                      context.read<CartProvider>().addquantity(
+                          ProductModel(productName, price, rating, imageurl));
                     },
                     icon: Icon(
                       Icons.add_box,

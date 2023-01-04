@@ -7,14 +7,9 @@ import 'package:provider/provider.dart';
 import 'bottom_bar.dart';
 import 'home_body.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,13 +42,17 @@ class _HomeState extends State<Home> {
               child: Badge(
                 badgeContent:
                     Text(context.watch<BadgeProvider>().counter.toString()),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartScreen()));
-                  },
-                  icon: Icon(Icons.shopping_cart),
-                  color: Colors.black,
+                child: Builder(
+                  builder: (context) => IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CartScreen()));
+                    },
+                    icon: Icon(Icons.shopping_cart),
+                    color: Colors.black,
+                  ),
                 ),
               ),
             )

@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:homework2/custom_widget/ItemCart.dart';
 import 'package:homework2/provider/badge_provider.dart';
+import 'package:homework2/provider/cart_provider.dart';
 import 'package:homework2/screens/add_product_screen/add_product_screen.dart';
 import 'package:homework2/screens/cart_screen/cart_screen.dart';
 import 'package:homework2/screens/home_screen/home.dart';
@@ -10,10 +11,12 @@ import 'package:homework2/screens/start_screen/body_my_app.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => BadgeProvider(),
-    child: Home(),
-  ));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => BadgeProvider(),
+    ),
+    ChangeNotifierProvider(create: (context) => CartProvider())
+  ], child: MaterialApp(debugShowCheckedModeBanner: false, home: Home())));
 }
 
 class MyApp extends StatelessWidget {

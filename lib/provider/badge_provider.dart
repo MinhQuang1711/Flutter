@@ -7,4 +7,9 @@ class BadgeProvider extends ChangeNotifier {
     _counter++;
     notifyListeners();
   }
+
+  void remove() {
+    _counter--;
+    notifyListeners();
+  }
 }
