@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:homework2/product_model/cart_model.dart';
 
 import '../product_model/product_model.dart';
 
@@ -6,32 +7,55 @@ class CartProvider extends ChangeNotifier {
   double _total = 0;
   int _quantity = 0;
   List<ProductModel> _listProduct = [];
+  List<CartModel> _listCard = [];
 
   double get total => _total;
   int get quantity => _quantity;
   List<ProductModel> get listProduct => _listProduct;
+  List<CartModel> get listCart => _listCard;
 
-  void addquantity(ProductModel model) {
-    _quantity++;
-    _listProduct.add(model);
-    print('added');
-    print(listProduct[0].productName);
-    print(listProduct[0].imageUrl);
-    print(listProduct[0].price);
-  }
-
-  void removequantity(ProductModel model) {
-    _quantity--;
-    _listProduct.removeWhere((item) => item.productName == model.productName);
-  }
-
-  void addTotal(double price) {
-    _total = _total + price;
+  void count() {
+    _quantity = 0;
+    for (int i = 0; i < _listCard.length; i++) {
+      _quantity = _quantity + _listCard[i].quantity;
+    }
     notifyListeners();
   }
 
-  void removeTotal(double price) {
-    _total = _total - price;
+  void addquantity(CartModel model) {
+    if (_listCard.any((element) =>
+        element.productModel.productName == model.productModel.productName)) {
+      _listCard
+          .firstWhere((element) =>
+              element.productModel.productName ==
+              model.productModel.productName)
+          .quantity++;
+    } else {
+      _listCard.add(model);
+    }
+    _total = _total + model.productModel.price;
+    notifyListeners();
+  }
+
+  void removequantity(CartModel model) {
+    _total = _total - model.productModel.price;
+    if (_listCard.any((element) =>
+        element.productModel.productName == model.productModel.productName)) {
+      _listCard
+          .firstWhere((element) =>
+              element.productModel.productName ==
+              model.productModel.productName)
+          .quantity--;
+      if (_listCard
+              .firstWhere((element) =>
+                  element.productModel.productName ==
+                  model.productModel.productName)
+              .quantity ==
+          0) {
+        _listCard.removeWhere((element) =>
+            element.productModel.productName == model.productModel.productName);
+      }
+    }
     notifyListeners();
   }
 }

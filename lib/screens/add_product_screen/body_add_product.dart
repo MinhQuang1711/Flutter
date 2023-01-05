@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:homework2/api/network_request.dart';
 import 'package:homework2/custom_widget/custom_button.dart';
 import 'package:homework2/custom_widget/custom_textfields.dart';
-import 'package:homework2/product_model/product_model.dart';
 
 class BodyAddProduct extends StatefulWidget {
   const BodyAddProduct({Key? key}) : super(key: key);
@@ -18,11 +17,6 @@ class _BodyAddProductState extends State<BodyAddProduct> {
   TextEditingController imageUrl = new TextEditingController();
 
   _addProduct() async {
-    print(productName.text.runtimeType);
-    print(imageUrl.text.runtimeType);
-
-    print(double.parse(rating.text).runtimeType);
-    print(double.parse(price.text).runtimeType);
     var res = await NetworkRequest.postProduct(productName.text, imageUrl.text,
         double.parse(rating.text), double.parse(price.text));
   }

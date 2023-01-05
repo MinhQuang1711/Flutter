@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:homework2/product_model/cart_model.dart';
 import 'package:homework2/product_model/product_model.dart';
-import 'package:homework2/provider/badge_provider.dart';
 import 'package:homework2/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -57,9 +57,9 @@ class CardProduct extends StatelessWidget {
                 padding: EdgeInsets.only(right: 15),
                 child: IconButton(
                     onPressed: () {
-                      context.read<BadgeProvider>().add();
-                      context.read<CartProvider>().addquantity(
-                          ProductModel(productName, price, rating, imageurl));
+                      context.read<CartProvider>().addquantity(CartModel(
+                          ProductModel(productName, price, rating, imageurl)));
+                      context.read<CartProvider>().count();
                     },
                     icon: Icon(
                       Icons.add_box,

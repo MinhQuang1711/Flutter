@@ -2,7 +2,6 @@ import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:homework2/custom_widget/ItemCart.dart';
-import 'package:homework2/provider/badge_provider.dart';
 import 'package:homework2/provider/cart_provider.dart';
 import 'package:homework2/screens/add_product_screen/add_product_screen.dart';
 import 'package:homework2/screens/cart_screen/cart_screen.dart';
@@ -12,10 +11,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => BadgeProvider(),
-    ),
-    ChangeNotifierProvider(create: (context) => CartProvider())
+    ChangeNotifierProvider(create: (context) => CartProvider()),
   ], child: MaterialApp(debugShowCheckedModeBanner: false, home: Home())));
 }
 

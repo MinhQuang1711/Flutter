@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homework2/api/network_request.dart';
+import 'package:homework2/product_model/cart_model.dart';
 import 'package:homework2/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -6,13 +8,20 @@ import '../../custom_widget/custom_button.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
-
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int total = 0;
+  int id = 1;
+
+  _postListPay() async {
+    var res = await NetworkRequest.postListPay(
+      context.read<CartProvider>().listCart,
+      context.read<CartProvider>().total,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +45,7 @@ class _BottomBarState extends State<BottomBar> {
                     style: TextStyle(fontSize: 16),
                     children: [
                       TextSpan(
-                          text: '${context.read<CartProvider>().total}',
+                          text: '\$ ${context.watch<CartProvider>().total}',
                           style: TextStyle(fontSize: 16, color: Colors.red))
                     ])),
               ),
@@ -47,7 +56,10 @@ class _BottomBarState extends State<BottomBar> {
                   circular: 15,
                   backgroundColor: Colors.yellow.shade800,
                   content: Text('BUY'),
-                  onPressed: () {})
+                  onPressed: () {
+                    _postListPay();
+                    id++;
+                  })
             ],
           )
         ],

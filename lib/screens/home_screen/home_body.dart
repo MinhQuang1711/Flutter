@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:homework2/provider/badge_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../custom_widget/cart_product.dart';
