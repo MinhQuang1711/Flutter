@@ -88,16 +88,6 @@ class _MainProductState extends State<MainProduct> {
     });
   }
 
-  // Future<List<ProductModel>> ReadDataModel() async {
-  //   //TODO
-  //   String dataJson = await DefaultAssetBundle.of(context)
-  //       .loadString('asset/jsonfile/productList.json');
-  //   List productModelMap = jsonDecode(dataJson);
-  //   List<ProductModel> listProduct =
-  //       productModelMap.map((e) => ProductModel.formJson(e)).toList();
-  //   return listProduct;
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Expanded(

@@ -1,18 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:homework2/product_model/cart_model.dart';
+import 'package:homework2/product_model/pay_model.dart';
 
 import '../product_model/product_model.dart';
 
 class CartProvider extends ChangeNotifier {
   double _total = 0;
   int _quantity = 0;
-  List<ProductModel> _listProduct = [];
   List<CartModel> _listCard = [];
 
   double get total => _total;
   int get quantity => _quantity;
-  List<ProductModel> get listProduct => _listProduct;
   List<CartModel> get listCart => _listCard;
+
+  void refesh() {
+    _listCard = [];
+    _total = 0;
+    notifyListeners();
+  }
 
   void count() {
     _quantity = 0;
@@ -33,6 +38,7 @@ class CartProvider extends ChangeNotifier {
     } else {
       _listCard.add(model);
     }
+    print(model.productModel.productName);
     _total = _total + model.productModel.price;
     notifyListeners();
   }

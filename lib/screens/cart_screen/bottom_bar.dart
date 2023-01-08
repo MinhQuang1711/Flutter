@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:homework2/api/network_request.dart';
 import 'package:homework2/product_model/cart_model.dart';
 import 'package:homework2/provider/cart_provider.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../../custom_widget/custom_button.dart';
+import '../../product_model/pay_model.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -12,14 +14,33 @@ class BottomBar extends StatefulWidget {
   State<BottomBar> createState() => _BottomBarState();
 }
 
-class _BottomBarState extends State<BottomBar> {
-  int id = 1;
+int id = 1;
 
-  _postListPay() async {
-    var res = await NetworkRequest.postListPay(
-      context.read<CartProvider>().listCart,
-      context.read<CartProvider>().total,
-    );
+class _BottomBarState extends State<BottomBar> {
+  postListPay() async {
+    var res = NetworkRequest.postListPay(context.read<CartProvider>().listCart,
+        context.read<CartProvider>().total, id);
+  }
+
+  postDetailPay() async {
+    int a = context.read<CartProvider>().listCart.length;
+    print(a);
+    for (int i = 0; i < a; i++) {
+      var res = NetworkRequest.postDetailPay(
+          id, context.read<CartProvider>().listCart[i]);
+    }
+  }
+
+  List<PayModel> list = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    NetworkRequest.fetchListPayModel().then((data) {
+      setState(() {
+        list = data;
+      });
+    });
   }
 
   @override
@@ -57,7 +78,9 @@ class _BottomBarState extends State<BottomBar> {
                   backgroundColor: Colors.yellow.shade800,
                   content: Text('BUY'),
                   onPressed: () {
-                    _postListPay();
+                    postListPay();
+                    postDetailPay();
+                    context.read<CartProvider>().refesh();
                     id++;
                   })
             ],

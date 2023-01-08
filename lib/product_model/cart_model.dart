@@ -6,7 +6,7 @@ class CartModel {
   int quantity = 1;
   CartModel(this.productModel);
 
-  CartModel.formJson(Map<String, dynamic> json) {
+  CartModel.fromJson(Map<String, dynamic> json) {
     productModel = json["productModel"];
     quantity = json["quantity"];
   }

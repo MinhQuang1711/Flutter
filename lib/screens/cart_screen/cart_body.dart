@@ -8,7 +8,6 @@ class CartBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context);
-    var item = cart.listProduct;
     var itemCart = cart.listCart;
     return ListView.builder(
       itemCount: itemCart.length,

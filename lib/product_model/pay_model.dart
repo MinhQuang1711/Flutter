@@ -1,12 +1,22 @@
+import 'dart:convert';
+
 import 'package:homework2/product_model/cart_model.dart';
 
 class PayModel {
-  late CartModel cartModel;
-  late int quantity;
-  PayModel(this.cartModel, this.quantity);
+  List<CartModel>? listModel;
+  double? total;
+  int? id;
 
-  PayModel.formJson(Map<String, dynamic> json) {
-    cartModel = json["listPay"];
-    quantity = json["quantity"];
+  PayModel({this.listModel, this.total, this.id});
+
+  PayModel.fromJson(Map<String, dynamic> Json) {
+    total = double.parse(Json["total"]);
+    id = int.parse(Json["id"]);
   }
+
+  Map<String, dynamic> toJson() => {
+        'listModel': listModel,
+        'total': total,
+        'id': id,
+      };
 }
