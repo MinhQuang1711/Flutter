@@ -35,7 +35,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   void dispose() {
-    Hive.close();
+    //Hive.close();
     super.dispose();
   }
 
