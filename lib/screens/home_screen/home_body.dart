@@ -81,11 +81,15 @@ class _MainProductState extends State<MainProduct> {
   @override
   void initState() {
     super.initState();
-    NetworkRequest.fetchProduct().then((data) {
-      setState(() {
-        postData = data;
+    try {
+      NetworkRequest.fetchProduct().then((data) {
+        setState(() {
+          postData = data;
+        });
       });
-    });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

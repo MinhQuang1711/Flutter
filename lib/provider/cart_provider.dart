@@ -8,10 +8,16 @@ class CartProvider extends ChangeNotifier {
   double _total = 0;
   int _quantity = 0;
   List<CartModel> _listCard = [];
+  List<PayModel> _listBought = [];
 
   double get total => _total;
   int get quantity => _quantity;
   List<CartModel> get listCart => _listCard;
+  List<PayModel> get listBought => _listBought;
+
+  void addListBought(PayModel payModel) {
+    listBought.add(payModel);
+  }
 
   void refesh() {
     _listCard = [];
@@ -28,6 +34,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addquantity(CartModel model) {
+    _total = _total + model.productModel.price;
     if (_listCard.any((element) =>
         element.productModel.productName == model.productModel.productName)) {
       _listCard
@@ -39,7 +46,6 @@ class CartProvider extends ChangeNotifier {
       _listCard.add(model);
     }
     print(model.productModel.productName);
-    _total = _total + model.productModel.price;
     notifyListeners();
   }
 

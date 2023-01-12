@@ -15,7 +15,7 @@ class ItemCart extends StatelessWidget {
           children: [
             Container(
               height: 110,
-              width: 110,
+              width: 40,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   image: DecorationImage(

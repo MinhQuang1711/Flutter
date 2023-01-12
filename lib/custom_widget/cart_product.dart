@@ -27,7 +27,7 @@ class CardProduct extends StatelessWidget {
         children: [
           Container(
             width: 200,
-            height: 160,
+            height: 100,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -36,7 +36,7 @@ class CardProduct extends StatelessWidget {
                     offset: Offset(0, 10))
               ],
               image: DecorationImage(
-                  image: AssetImage(imageurl!), fit: BoxFit.cover),
+                  image: AssetImage(imageurl), fit: BoxFit.cover),
               //color: Colors.yellow.withOpacity(0.2),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),

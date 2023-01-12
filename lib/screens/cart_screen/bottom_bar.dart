@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:homework2/Test/Hive/hive_actions.dart';
 import 'package:homework2/api/network_request.dart';
-import 'package:homework2/product_model/cart_model.dart';
+
 import 'package:homework2/provider/cart_provider.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../../custom_widget/custom_button.dart';
 import '../../product_model/pay_model.dart';
+import 'package:hive/hive.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -17,30 +18,25 @@ class BottomBar extends StatefulWidget {
 int id = 1;
 
 class _BottomBarState extends State<BottomBar> {
-  postListPay() async {
-    var res = NetworkRequest.postListPay(context.read<CartProvider>().listCart,
-        context.read<CartProvider>().total, id);
+  addtoBox() {
+    PayModel payModel = PayModel(
+        listModel: context.read<CartProvider>().listCart,
+        total: context.read<CartProvider>().total);
+    HiveActions.addPayModel(payModel);
   }
 
-  postDetailPay() async {
-    int a = context.read<CartProvider>().listCart.length;
-    print(a);
-    for (int i = 0; i < a; i++) {
-      var res = NetworkRequest.postDetailPay(
-          id, context.read<CartProvider>().listCart[i]);
-    }
+  postListPay() {
+    PayModel payModel = PayModel(
+        listModel: context.read<CartProvider>().listCart,
+        total: context.read<CartProvider>().total,
+        id: id);
+    NetworkRequest.postListPay(payModel);
   }
 
-  List<PayModel> list = [];
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    NetworkRequest.fetchListPayModel().then((data) {
-      setState(() {
-        list = data;
-      });
-    });
+  void dispose() {
+    Hive.close();
+    super.dispose();
   }
 
   @override
@@ -79,7 +75,8 @@ class _BottomBarState extends State<BottomBar> {
                   content: Text('BUY'),
                   onPressed: () {
                     postListPay();
-                    postDetailPay();
+                    addtoBox();
+                    HiveActions.getPayModel();
                     context.read<CartProvider>().refesh();
                     id++;
                   })
