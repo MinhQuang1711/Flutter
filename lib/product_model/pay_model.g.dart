@@ -20,19 +20,21 @@ class PayModelAdapter extends TypeAdapter<PayModel> {
       listModel: (fields[1] as List).cast<CartModel>(),
       total: fields[2] as double?,
       id: fields[3] as int?,
-    );
+    )..listModel2 = (fields[4] as HiveList?)?.castHiveList();
   }
 
   @override
   void write(BinaryWriter writer, PayModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(1)
       ..write(obj.listModel)
       ..writeByte(2)
       ..write(obj.total)
       ..writeByte(3)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.listModel2);
   }
 
   @override

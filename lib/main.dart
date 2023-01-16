@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import 'package:homework2/custom_widget/ItemCart.dart';
+import 'package:homework2/custom_widget/bought_product.dart';
 import 'package:homework2/product_model/cart_model.dart';
 import 'package:homework2/product_model/pay_model.dart';
 import 'package:homework2/product_model/product_model.dart';
@@ -20,6 +21,8 @@ void main() async {
   Hive.registerAdapter(PayModelAdapter());
   Hive.registerAdapter(CartModelAdapter()); // REGISTER ADAPTER TO USE
   Hive.registerAdapter(ProductModelAdapter());
+
+  var payBox2 = await Hive.openBox<Map<String,dynamic>>('payBox2');
   var cartBox = await Hive.openBox<CartModel>('cartModelBox'); // OPEN BOX
   var PayBox = await Hive.openBox<PayModel>('PayModelBox'); //OPEN BOX
   runApp(MultiProvider(providers: [

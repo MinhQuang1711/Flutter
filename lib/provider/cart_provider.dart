@@ -16,7 +16,9 @@ class CartProvider extends ChangeNotifier {
   List<PayModel> get listBought => _listBought;
 
   void addListBought(PayModel payModel) {
-    listBought.add(payModel);
+    _listBought.add(payModel);
+    print(listBought);
+    notifyListeners();
   }
 
   void refesh() {
@@ -45,7 +47,6 @@ class CartProvider extends ChangeNotifier {
     } else {
       _listCard.add(model);
     }
-    print(model.productModel.productName);
     notifyListeners();
   }
 

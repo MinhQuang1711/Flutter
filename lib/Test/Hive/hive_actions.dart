@@ -1,19 +1,32 @@
+import 'package:hive/hive.dart';
 import 'package:homework2/Box/box.dart';
+import 'package:homework2/product_model/cart_model.dart';
 import 'package:homework2/product_model/pay_model.dart';
+import 'dart:convert';
 
 class HiveActions {
-  static Future addPayModel(PayModel model) async {
-    //TODO
-    final payModel = PayModel(listModel: model.listModel, total: model.total);
-    final box = Boxes.getPayModel();
-    box.add(model);
-    print(box);
+  static Future addToBox2(PayModel model, int id) async {
+    var box = await Hive.openBox("payment");
+    box.put(
+      id,
+      json.encode({
+        "modelList": model.listModel.map((e) => e.toJson()).toList(),
+        "total": model.total
+      }),
+    );
+
+    final saveResult = box.values;
+    print(saveResult);
   }
 
-  static Future getPayModel() async {
-    //TODO
-    final box = Boxes.getPayModel();
-    var list = box.values.toList();
-    print(list);
+  static Future addToBox(PayModel model) async {
+    var box = await Hive.openBox("payment");
+    box.add(model);
+    final saveResult = box.values;
+    print(saveResult);
+  }
+
+  static Future getFromBox2() async {
+    var box = Boxes.getPayModel2();
   }
 }

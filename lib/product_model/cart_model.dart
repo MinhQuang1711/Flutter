@@ -19,7 +19,7 @@ class CartModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'productModel': productModel,
+        'productName': productModel.productName,
         'quantity': quantity.toString(),
       };
 }

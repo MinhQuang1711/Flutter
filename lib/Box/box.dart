@@ -5,6 +5,10 @@ import 'package:hive/hive.dart';
 import 'package:homework2/product_model/product_model.dart';
 
 class Boxes {
+  static Box<Map<String, dynamic>> getPayModel2() {
+    return Hive.box<Map<String,dynamic>>('payBox2');
+  }
+
   static Box<PayModel> getPayModel() {
     return Hive.box<PayModel>('PayModelBox');
   }

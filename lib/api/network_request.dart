@@ -45,24 +45,6 @@ class NetworkRequest {
     return post;
   }
 
-  // static List<PayModel> parseListPayModel(String responseBody) {
-  //   final jsonMap = json.decode(responseBody);
-  //   var list = json.decode(responseBody) as List<dynamic>;
-  //   List<PayModel> post = list.map((e) => PayModel.fromJson(e)).toList();
-  //   return post;
-  // }
-
-  // static Future<List<PayModel>> fetchListPayModel() async {
-  //   var response = await http.get(Uri.parse(apiPaySuccessful));
-  //   if (response.statusCode == 200) {
-  //     return compute(parseListPayModel, response.body);
-  //   } else if (response.statusCode == 404) {
-  //     throw Exception('Not found');
-  //   } else {
-  //     throw Exception('Can\'t get post');
-  //   }
-  // }
-
   static Future<bool> postListPay(PayModel payModel) async {
     final response = await http.post(Uri.parse(apiPaySuccessful),
         body: json.encode(payModel.toJson()));
@@ -75,21 +57,4 @@ class NetworkRequest {
     }
   }
 
-  // static Future<dynamic> postDetailPay(int id, CartModel model) async {
-  //   print(id);
-  //   String url = apiPaySuccessful + '/' + id.toString() + apiDetailPay;
-  //   final response = await http.post(
-  //       Uri.parse(apiPaySuccessful + '/' + id.toString() + apiDetailPay),
-  //       body: {
-  //         "PaySuccessfulId": id.toString(),
-  //         "productName": model.productModel.productName,
-  //         "price": model.productModel.price.toString(),
-  //         "quantity": model.quantity.toString()
-  //       });
-  //   if (response.statusCode == 201) {
-  //     print("success post detail pay");
-  //   } else {
-  //     print(response.statusCode);
-  //   }
-  // }
 }

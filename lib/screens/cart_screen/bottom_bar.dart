@@ -18,11 +18,22 @@ class BottomBar extends StatefulWidget {
 int id = 1;
 
 class _BottomBarState extends State<BottomBar> {
-  addtoBox() {
-    PayModel payModel = PayModel(
+  addToBox() {
+    PayModel model = PayModel(
         listModel: context.read<CartProvider>().listCart,
         total: context.read<CartProvider>().total);
-    HiveActions.addPayModel(payModel);
+    HiveActions.addToBox(model);
+  }
+
+  addToBox2() {
+    PayModel model = PayModel(
+        listModel: context.read<CartProvider>().listCart,
+        total: context.read<CartProvider>().total);
+    HiveActions.addToBox2(model, id);
+  }
+
+  getFromBox2() {
+    HiveActions.getFromBox2();
   }
 
   postListPay() {
@@ -31,6 +42,14 @@ class _BottomBarState extends State<BottomBar> {
         total: context.read<CartProvider>().total,
         id: id);
     NetworkRequest.postListPay(payModel);
+  }
+
+  addtoBought() {
+    PayModel model = PayModel(
+        listModel: context.read<CartProvider>().listCart,
+        total: context.read<CartProvider>().total,
+        id: id);
+    context.read<CartProvider>().addListBought(model);
   }
 
   @override
@@ -75,8 +94,8 @@ class _BottomBarState extends State<BottomBar> {
                   content: Text('BUY'),
                   onPressed: () {
                     postListPay();
-                    addtoBox();
-                    HiveActions.getPayModel();
+                    addToBox2();
+                    addtoBought();
                     context.read<CartProvider>().refesh();
                     id++;
                   })
