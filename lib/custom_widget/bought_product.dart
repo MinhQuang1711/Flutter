@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:homework2/product_model/pay_model.dart';
+import 'package:homework2/screens/order_detail_screen/order_detail.dart';
 
 class BoughtProduct extends StatelessWidget {
- BoughtProduct({required this.imageUrl,required this.total,super.key});
-  String imageUrl;
-  double? total;
+  BoughtProduct({required this.payModel,super.key});
+  PayModel payModel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +28,37 @@ class BoughtProduct extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              imageUrl,
+              payModel.listModel.first.productModel.imageUrl,
               fit: BoxFit.contain,
             ),
           ),
           Spacer(),
-          Container(
-            margin: EdgeInsets.only(right: 100),
-            child: Text(
-              'Total: ${total}',
-              style: TextStyle(fontSize: 17),
-            ),
+          Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 100),
+                child: Text(
+                  'Total: ${payModel.total}',
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              Container(
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderDetail(payModel: payModel,)));
+                    },
+                    child: Text(
+                      'Xem chi tiết',
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline),
+                    )),
+              )
+            ],
           )
         ],
       ),

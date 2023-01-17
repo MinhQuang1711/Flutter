@@ -22,7 +22,7 @@ void main() async {
   Hive.registerAdapter(CartModelAdapter()); // REGISTER ADAPTER TO USE
   Hive.registerAdapter(ProductModelAdapter());
 
-  var payBox2 = await Hive.openBox<Map<String,dynamic>>('payBox2');
+  var payBox2 = await Hive.openBox<Map<String, dynamic>>('payBox2');
   var cartBox = await Hive.openBox<CartModel>('cartModelBox'); // OPEN BOX
   var PayBox = await Hive.openBox<PayModel>('PayModelBox'); //OPEN BOX
   runApp(MultiProvider(providers: [

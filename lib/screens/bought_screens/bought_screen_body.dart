@@ -35,13 +35,15 @@ class _BoughtScreensBodyState extends State<BoughtScreensBody> {
                     backgroundColor: Colors.red,
                     icon: Icons.delete,
                     label: 'Delete',
-                    onPressed: (context) => onDelete(index))
+                    onPressed: (context) {
+                      onDelete(index);
+                      cart.listBought.removeAt(index);
+                    })
               ],
             ),
             child: BoughtProduct(
-                imageUrl:
-                    listBought.first.listModel.first.productModel.imageUrl,
-                total: listBought[index].total),
+              payModel: listBought[index],
+            ),
           );
         }));
   }

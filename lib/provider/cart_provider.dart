@@ -24,6 +24,7 @@ class CartProvider extends ChangeNotifier {
   void refesh() {
     _listCard = [];
     _total = 0;
+    _quantity = 0;
     notifyListeners();
   }
 
