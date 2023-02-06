@@ -50,7 +50,7 @@ class BoughtProduct extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => OrderDetail(payModel: payModel,)));
                     },
-                    child: Text(
+                    child:const Text(
                       'Xem chi tiết',
                       style: TextStyle(
                           color: Colors.red,

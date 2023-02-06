@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:homework2/api/network_request.dart';
 import 'package:homework2/custom_widget/bought_product.dart';
+import 'package:homework2/product_model/pay_model.dart';
+import 'package:homework2/product_model/product_model.dart';
 import 'package:homework2/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +15,8 @@ class BoughtScreensBody extends StatefulWidget {
 }
 
 class _BoughtScreensBodyState extends State<BoughtScreensBody> {
+  List<PayModel> listPay = [];
+
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<CartProvider>(context);

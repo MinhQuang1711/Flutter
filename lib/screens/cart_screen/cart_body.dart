@@ -6,6 +6,8 @@ import 'package:homework2/provider/cart_provider.dart';
 import 'package:homework2/screens/bought_screens/bought_screens.dart';
 import 'package:provider/provider.dart';
 
+import 'bottom_bar.dart';
+
 class CartBody extends StatelessWidget {
   const CartBody({Key? key}) : super(key: key);
   @override
@@ -15,33 +17,7 @@ class CartBody extends StatelessWidget {
     var itemCart = cart.listCart;
     return Column(
       children: [
-        Container(
-          height: 40,
-          width: size.width,
-          child: Row(
-            children: [
-              Expanded(
-                  child: Center(
-                      child: GestureDetector(
-                child: const Text(
-                  "Giỏ hàng",
-                ),
-                onTap: () {},
-              ))),
-              Expanded(
-                  child: Center(
-                      child: GestureDetector(
-                child: const Text('Đã mua'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => BoughtScreens()));
-                },
-              )))
-            ],
-          ),
-        ),
         Expanded(
-          flex: 5,
           child: ListView.builder(
             itemCount: itemCart.length,
             itemBuilder: (context, index) {
@@ -49,6 +25,7 @@ class CartBody extends StatelessWidget {
             },
           ),
         ),
+        Container(alignment: Alignment.bottomCenter, child: BottomBar())
       ],
     );
   }

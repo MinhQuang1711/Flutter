@@ -44,7 +44,7 @@ class ItemCart extends StatelessWidget {
             OutlinedButton(
               onPressed: () {
                 context.read<CartProvider>().addquantity(model);
-                context.read<CartProvider>().count();
+                context.read<CartProvider>().count_item();
               },
               child: Icon(Icons.add),
               style: ElevatedButton.styleFrom(
@@ -56,7 +56,7 @@ class ItemCart extends StatelessWidget {
             OutlinedButton(
                 onPressed: () {
                   context.read<CartProvider>().removequantity(model);
-                  context.read<CartProvider>().count();
+                  context.read<CartProvider>().count_item();
                 },
                 child: Icon(Icons.minimize_sharp))
           ],

@@ -28,7 +28,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void count() {
+  void count_item() {
     _quantity = 0;
     for (int i = 0; i < _listCard.length; i++) {
       _quantity = _quantity + _listCard[i].quantity;
@@ -37,6 +37,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addquantity(CartModel model) {
+    CartModel cartmodel = model;
     _total = _total + model.productModel.price;
     if (_listCard.any((element) =>
         element.productModel.productName == model.productModel.productName)) {

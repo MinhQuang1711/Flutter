@@ -12,21 +12,17 @@ class PayModel extends HiveObject {
   @HiveField(2)
   double? total;
   @HiveField(3)
-  int? id;
-
-  @HiveField(4)
-  HiveList? listModel2;
+  String? id;
 
   PayModel({required this.listModel, this.total, this.id});
-  String toString() => total.toString(); // For print()
 
   PayModel.fromJson(Map<String, dynamic> Json) {
+    listModel = Json["listModel"] ;
     total = double.parse(Json["total"]);
-    id = int.parse(Json["id"]);
+    id = (Json["id"]);
   }
 
   Map<String, dynamic> toJson() {
-  
     List<Map<String, dynamic>> listmodel =
         listModel.map((e) => e.toJson()).toList();
     return {

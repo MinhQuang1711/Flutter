@@ -56,5 +56,4 @@ class NetworkRequest {
       return false;
     }
   }
-
 }

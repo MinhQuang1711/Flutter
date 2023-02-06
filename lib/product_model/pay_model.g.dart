@@ -19,8 +19,8 @@ class PayModelAdapter extends TypeAdapter<PayModel> {
     return PayModel(
       listModel: (fields[1] as List).cast<CartModel>(),
       total: fields[2] as double?,
-      id: fields[3] as int?,
-    )..listModel2 = (fields[4] as HiveList?)?.castHiveList();
+      id: fields[3] as String?,
+    );
   }
 
   @override
@@ -32,9 +32,7 @@ class PayModelAdapter extends TypeAdapter<PayModel> {
       ..writeByte(2)
       ..write(obj.total)
       ..writeByte(3)
-      ..write(obj.id)
-      ..writeByte(4)
-      ..write(obj.listModel2);
+      ..write(obj.id);
   }
 
   @override

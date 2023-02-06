@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:homework2/Test/Hive/hive_actions.dart';
 import 'package:homework2/api/network_request.dart';
 
 import 'package:homework2/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../custom_widget/custom_button.dart';
+import '../../hive/hive_action.dart';
 import '../../product_model/pay_model.dart';
 import 'package:hive/hive.dart';
 
@@ -15,48 +15,40 @@ class BottomBar extends StatefulWidget {
   State<BottomBar> createState() => _BottomBarState();
 }
 
-int id = 1;
-
 class _BottomBarState extends State<BottomBar> {
-  addToBox() {
+  List<PayModel> listPay = [];
+
+  savePayment(DateTime id) {
     PayModel model = PayModel(
         listModel: context.read<CartProvider>().listCart,
         total: context.read<CartProvider>().total);
-    HiveActions.addToBox(model);
+    HiveActions.savePayment(model, id.toString());
   }
 
-  addToBox2() {
-    PayModel model = PayModel(
-        listModel: context.read<CartProvider>().listCart,
-        total: context.read<CartProvider>().total);
-    HiveActions.addToBox2(model, id);
-  }
-
-  getFromBox2() {
-    HiveActions.getFromBox2();
-  }
-
-  postListPay() {
+  postListPay(DateTime id) {
     PayModel payModel = PayModel(
         listModel: context.read<CartProvider>().listCart,
         total: context.read<CartProvider>().total,
-        id: id);
+        id: id.toString());
+
+    print(payModel.id);
     NetworkRequest.postListPay(payModel);
   }
 
-  addtoBought() {
+  addtoBought(DateTime id) {
     PayModel model = PayModel(
         listModel: context.read<CartProvider>().listCart,
         total: context.read<CartProvider>().total,
-        id: id);
+        id: id.toString());
     context.read<CartProvider>().addListBought(model);
   }
 
   @override
   void dispose() {
-    //Hive.close();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +59,8 @@ class _BottomBarState extends State<BottomBar> {
               topRight: Radius.circular(25), topLeft: Radius.circular(25)),
           color: Colors.white,
           boxShadow: [
-            BoxShadow(offset: Offset(0, -7), blurRadius: 10, color: Colors.grey)
+            const BoxShadow(
+                offset: Offset(0, -7), blurRadius: 10, color: Colors.grey)
           ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 15),
                 child: Text.rich(TextSpan(
                     text: 'Total: \n',
                     style: TextStyle(fontSize: 16),
@@ -85,19 +78,19 @@ class _BottomBarState extends State<BottomBar> {
                           style: TextStyle(fontSize: 16, color: Colors.red))
                     ])),
               ),
-              Spacer(),
+              const Spacer(),
               CustomButton(
                   sizeHeight: 50,
                   sizeWidth: 150,
                   circular: 15,
                   backgroundColor: Colors.yellow.shade800,
-                  content: Text('BUY'),
+                  content: const Text('BUY'),
                   onPressed: () {
-                    postListPay();
-                    addToBox2();
-                    addtoBought();
+                    DateTime id = DateTime.now();
+                    postListPay(id);
+                    savePayment(id);
+                    addtoBought(id);
                     context.read<CartProvider>().refesh();
-                    id++;
                   })
             ],
           )

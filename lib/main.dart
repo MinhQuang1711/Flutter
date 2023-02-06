@@ -16,18 +16,26 @@ import 'package:homework2/screens/start_screen/body_my_app.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+const String home = "/";
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PayModelAdapter());
   Hive.registerAdapter(CartModelAdapter()); // REGISTER ADAPTER TO USE
   Hive.registerAdapter(ProductModelAdapter());
 
-  var payBox2 = await Hive.openBox<Map<String, dynamic>>('payBox2');
-  var cartBox = await Hive.openBox<CartModel>('cartModelBox'); // OPEN BOX
-  var PayBox = await Hive.openBox<PayModel>('PayModelBox'); //OPEN BOX
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => CartProvider()),
-  ], child: MaterialApp(debugShowCheckedModeBanner: false, home: Home())));
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) {
+          return CartProvider();
+        }),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: home,
+        routes: <String, WidgetBuilder>{
+          home: (context) => Home(),
+        },
+      )));
 }
 
 class MyApp extends StatelessWidget {

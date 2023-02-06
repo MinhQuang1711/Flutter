@@ -1,11 +1,16 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:homework2/main.dart';
 import 'package:homework2/provider/cart_provider.dart';
+import 'package:homework2/router/router.dart';
 import 'package:homework2/screens/cart_screen/cart_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../add_product_screen/add_product_screen.dart';
 import 'bottom_bar.dart';
 import 'home_body.dart';
+
+const String cartScreen = "/cartScreen";
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,6 +19,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(builder: (context, value, child) {
       return MaterialApp(
+        routes: <String, WidgetBuilder>{cartScreen: (context) => CartScreen(),
+        addProduct:(context) => AddProductScreen()},
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
@@ -45,10 +52,7 @@ class Home extends StatelessWidget {
                   child: Builder(
                     builder: (context) => IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CartScreen()));
+                        Navigator.of(context).pushNamed(cartScreen);
                       },
                       icon: Icon(Icons.shopping_cart),
                       color: Colors.black,

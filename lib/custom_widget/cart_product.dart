@@ -43,7 +43,7 @@ class CardProduct extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Text(productName!),
+          Text(productName),
           SizedBox(height: 5),
           Expanded(child: ratingBar),
           SizedBox(height: 3),
@@ -59,7 +59,7 @@ class CardProduct extends StatelessWidget {
                     onPressed: () {
                       context.read<CartProvider>().addquantity(CartModel(
                           ProductModel(productName, price, rating, imageurl)));
-                      context.read<CartProvider>().count();
+                      context.read<CartProvider>().count_item();
                     },
                     icon: Icon(
                       Icons.add_box,
